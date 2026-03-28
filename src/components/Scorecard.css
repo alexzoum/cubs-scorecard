@@ -1,0 +1,203 @@
+.scorecard {
+  background: white;
+  border: 2px solid #0E3386;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.scorecard-team-header {
+  background: #0E3386;
+  color: white;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scorecard-team-name {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Georgia', serif;
+}
+
+.scorecard-side-badge {
+  font-size: 0.7rem;
+  background: rgba(255,255,255,0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Table wrapper ── */
+.scorecard-table-wrapper {
+  overflow-x: auto;
+}
+
+.scorecard-table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 0.78rem;
+  font-family: 'Georgia', serif;
+  background: #fffdf7;
+}
+
+.scorecard-table th,
+.scorecard-table td {
+  border: 1px solid #d8ccb0;
+  text-align: center;
+  white-space: nowrap;
+  height: 48px;
+  vertical-align: middle;
+}
+
+.scorecard-table thead th {
+  background: #f5f0e4;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: #555;
+  height: 28px;
+  padding: 0 4px;
+}
+
+/* ── Column widths ── */
+.sc-col-num     { width: 24px; min-width: 24px; color: #888; font-size: 0.7rem; }
+.sc-col-jersey  { width: 30px; min-width: 30px; color: #888; }
+.sc-col-player  { width: 150px; min-width: 150px; text-align: left !important; padding-left: 8px; }
+.sc-col-pos     { width: 36px; min-width: 36px; font-weight: bold; color: #444; }
+.sc-col-ab      { width: 48px; min-width: 48px; padding: 2px; }
+.sc-col-stat    { width: 32px; min-width: 32px; font-size: 0.75rem; }
+.sc-stat-border { border-left: 2px solid #9b8e6e !important; }
+
+/* ── Sticky left columns ── */
+.sc-col-num {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #f5f0e4;
+}
+.sc-sticky-2 {
+  position: sticky;
+  left: 24px;
+  z-index: 2;
+  background: inherit;
+}
+.sc-sticky-3 {
+  position: sticky;
+  left: 54px;
+  z-index: 2;
+  background: inherit;
+}
+.sc-sticky-4 {
+  position: sticky;
+  left: 204px;
+  z-index: 2;
+  background: inherit;
+}
+
+.scorecard-table thead th.sc-col-num,
+.scorecard-table thead .sc-sticky-2,
+.scorecard-table thead .sc-sticky-3,
+.scorecard-table thead .sc-sticky-4 {
+  background: #f5f0e4;
+  z-index: 3;
+}
+
+/* ── Row styles ── */
+.scorecard-table tbody tr:hover td {
+  background: #f0ece0;
+}
+
+.sc-row-sub td {
+  color: #777;
+  font-style: italic;
+  background: #faf8f2;
+}
+
+.sc-row-sub .sc-sticky-2,
+.sc-row-sub .sc-sticky-3,
+.sc-row-sub .sc-sticky-4 {
+  background: #faf8f2;
+}
+
+/* ── Totals row ── */
+.sc-totals-row {
+  border-top: 2px solid #9b8e6e;
+  background: #f0ece0;
+}
+
+.sc-totals-label {
+  text-align: right !important;
+  padding-right: 10px;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: #777;
+  font-weight: bold;
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #f0ece0;
+}
+
+.sc-total-val {
+  font-weight: bold;
+  color: #0E3386;
+}
+
+/* ── Pitching section ── */
+.pitching-section {
+  border-top: 2px solid #0E3386;
+}
+
+.pitching-header {
+  background: #1a4a9a;
+  color: white;
+  padding: 5px 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  font-family: 'Georgia', serif;
+}
+
+.pitching-table-wrapper {
+  overflow-x: auto;
+}
+
+.pitching-table {
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  font-family: 'Georgia', serif;
+  width: 100%;
+  background: #fffdf7;
+}
+
+.pitching-table th,
+.pitching-table td {
+  border: 1px solid #d8ccb0;
+  padding: 5px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pitching-table thead th {
+  background: #f5f0e4;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: #555;
+}
+
+.pt-col-name {
+  text-align: left !important;
+  width: 180px;
+  min-width: 180px;
+}
+
+.pt-col-dec {
+  font-weight: bold;
+  width: 36px;
+}
+
+.pt-row-win td { background: #e8f4e8; }
+.pt-row-win .pt-col-dec { color: #1a7a1a; }
+.pt-row-loss td { background: #fce8e8; }
+.pt-row-loss .pt-col-dec { color: #b01010; }
