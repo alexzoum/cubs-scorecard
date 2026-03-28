@@ -94,13 +94,8 @@
 }
 
 .sc-row-sub .sc-sticky-1    { background: #faf8f2; }
-.scorecard-table tbody tr:hover .sc-sticky-1 { background: #f0ece0; }
 
 /* ── Row styles ── */
-.scorecard-table tbody tr:hover td {
-  background: #f0ece0;
-}
-
 .sc-row-sub td {
   color: #777;
   font-style: italic;
