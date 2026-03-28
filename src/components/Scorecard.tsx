@@ -42,7 +42,15 @@ export default function Scorecard({ data, feed, side }: Props) {
             {data.batters.map((batter, idx) => (
               <tr key={batter.batterId} className={batter.totals.ab === 0 && idx > 0 ? 'sc-row-sub' : ''}>
                 <td className="sc-col-player sc-sticky-1">
-                  <span className="sc-player-name">{batter.fullName}</span>
+                  <span className="sc-player-name">
+                    {batter.fullName}
+                    {batter.isCurrentBatter && (
+                      <svg className="sc-bat-icon" viewBox="0 0 24 24" width="12" height="12" aria-label="Current batter">
+                        <path d="M3 21 L18 6 Q20 3 22 5 Q24 7 21 9 L6 21 Z" fill="#0E3386" />
+                        <rect x="1" y="19" width="5" height="3" rx="1.5" fill="#8B7040" />
+                      </svg>
+                    )}
+                  </span>
                   <span className="sc-player-pos">{batter.position}</span>
                 </td>
                 {abCols.map(i => (

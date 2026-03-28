@@ -14,6 +14,7 @@ export interface BatterRow {
   fullName: string;
   position: string;
   jerseyNumber: string;
+  isCurrentBatter: boolean;
   atBats: AtBatEntry[];
   totals: {
     ab: number;
@@ -196,6 +197,7 @@ export function buildScorecardData(
         fullName: player.person.fullName,
         position: player.position.abbreviation,
         jerseyNumber: player.jerseyNumber,
+        isCurrentBatter: player.gameStatus.isCurrentBatter,
         atBats: batterAtBats.get(playerId) ?? [],
         totals: {
           ab: stats.atBats,

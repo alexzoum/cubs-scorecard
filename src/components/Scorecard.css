@@ -69,8 +69,14 @@
 
 /* Player name + position subtext */
 .sc-player-name {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.78rem;
+}
+
+.sc-bat-icon {
+  flex-shrink: 0;
 }
 .sc-player-pos {
   display: block;
