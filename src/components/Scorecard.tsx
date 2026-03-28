@@ -26,10 +26,7 @@ export default function Scorecard({ data, feed, side }: Props) {
         <table className="scorecard-table">
           <thead>
             <tr>
-              <th className="sc-col-num">#</th>
-              <th className="sc-col-jersey sc-sticky-2">№</th>
-              <th className="sc-col-player sc-sticky-3">PLAYER</th>
-              <th className="sc-col-pos sc-sticky-4">POS</th>
+              <th className="sc-col-player sc-sticky-1">PLAYER</th>
               {abCols.map(i => (
                 <th key={i} className="sc-col-ab">{i + 1}</th>
               ))}
@@ -44,10 +41,10 @@ export default function Scorecard({ data, feed, side }: Props) {
           <tbody>
             {data.batters.map((batter, idx) => (
               <tr key={batter.batterId} className={batter.totals.ab === 0 && idx > 0 ? 'sc-row-sub' : ''}>
-                <td className="sc-col-num">{idx + 1}</td>
-                <td className="sc-col-jersey sc-sticky-2">{batter.jerseyNumber}</td>
-                <td className="sc-col-player sc-sticky-3">{batter.fullName}</td>
-                <td className="sc-col-pos sc-sticky-4">{batter.position}</td>
+                <td className="sc-col-player sc-sticky-1">
+                  <span className="sc-player-name">{batter.fullName}</span>
+                  <span className="sc-player-pos">{batter.position}</span>
+                </td>
                 {abCols.map(i => (
                   <td key={i} className="sc-col-ab">
                     <AtBatCell atBat={batter.atBats[i]} />
@@ -64,7 +61,7 @@ export default function Scorecard({ data, feed, side }: Props) {
           </tbody>
           <tfoot>
             <tr className="sc-totals-row">
-              <td colSpan={4} className="sc-totals-label">TOTALS</td>
+              <td colSpan={1} className="sc-totals-label">TOTALS</td>
               {abCols.map(i => (
                 <td key={i} className="sc-col-ab" />
               ))}

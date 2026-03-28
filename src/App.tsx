@@ -70,25 +70,25 @@ function Linescore({ feed }: { feed: LiveFeed }) {
   );
 }
 
+function mascot(fullName: string): string {
+  const parts = fullName.trim().split(' ');
+  return parts[parts.length - 1];
+}
+
 function GameHeader({ feed }: { feed: LiveFeed; game?: ScheduleGame }) {
   const { gameData } = feed;
   const { teams, status } = gameData;
   const isLive = status.abstractGameState === 'Live';
   const isFinal = status.abstractGameState === 'Final';
   const { linescore } = feed.liveData;
+  const isEndOfInning = linescore.inningState === 'End' || linescore.inningState === 'Middle';
 
   return (
     <div className="game-header">
       <div className="game-matchup">
-        <span className="game-team away-team">
-          {teams.away.name}
-          <span className="game-score">{feed.liveData.linescore.teams.away.runs}</span>
-        </span>
+        <span className="game-team away-team">{mascot(teams.away.name)}</span>
         <span className="game-vs">@</span>
-        <span className="game-team home-team">
-          <span className="game-score">{feed.liveData.linescore.teams.home.runs}</span>
-          {teams.home.name}
-        </span>
+        <span className="game-team home-team">{mascot(teams.home.name)}</span>
       </div>
 
       <div className="game-meta-row">
@@ -115,7 +115,7 @@ function GameHeader({ feed }: { feed: LiveFeed; game?: ScheduleGame }) {
         {isLive && (
           <span className="status-badge status-live">
             ● LIVE — {linescore.inningState} {linescore.currentInningOrdinal}
-            {' · '}{linescore.balls}-{linescore.strikes}, {linescore.outs} out{linescore.outs !== 1 ? 's' : ''}
+            {!isEndOfInning && ` · ${linescore.balls}-${linescore.strikes}, ${linescore.outs} out${linescore.outs !== 1 ? 's' : ''}`}
           </span>
         )}
         {isFinal && (

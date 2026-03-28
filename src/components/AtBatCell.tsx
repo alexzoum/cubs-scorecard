@@ -16,7 +16,7 @@ const IDLE_COLOR = '#c8bfa8';
 export default function AtBatCell({ atBat }: Props) {
   if (!atBat) {
     return (
-      <svg viewBox="0 0 44 44" width="44" height="44" className="ab-cell ab-cell--empty">
+      <svg viewBox="0 0 44 44" width="52" height="52" className="ab-cell ab-cell--empty">
         <line x1={HOME.x} y1={HOME.y} x2={FIRST.x} y2={FIRST.y} stroke={IDLE_COLOR} strokeWidth="1" />
         <line x1={FIRST.x} y1={FIRST.y} x2={SECOND.x} y2={SECOND.y} stroke={IDLE_COLOR} strokeWidth="1" />
         <line x1={SECOND.x} y1={SECOND.y} x2={THIRD.x} y2={THIRD.y} stroke={IDLE_COLOR} strokeWidth="1" />
@@ -40,7 +40,7 @@ export default function AtBatCell({ atBat }: Props) {
   });
 
   return (
-    <svg viewBox="0 0 44 44" width="44" height="44" className={`ab-cell${isOut ? ' ab-cell--out' : ''}${isScorer ? ' ab-cell--scored' : ''}`}>
+    <svg viewBox="0 0 44 44" width="52" height="52" className={`ab-cell${isOut ? ' ab-cell--out' : ''}${isScorer ? ' ab-cell--scored' : ''}`}>
       {/* Inning number */}
       <text x="3" y="9" fontSize="6" fill="#aaa" fontFamily="monospace">{inning}</text>
 

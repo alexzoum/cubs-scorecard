@@ -116,26 +116,6 @@ body {
   flex-wrap: wrap;
 }
 
-.game-team {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.game-score {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: #0E3386;
-  color: white;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-width: 32px;
-  height: 30px;
-  padding: 0 6px;
-}
-
 .game-vs { color: #888; font-weight: normal; font-size: 0.9rem; }
 
 .game-meta-row {

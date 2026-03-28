@@ -62,53 +62,39 @@
 }
 
 /* ── Column widths ── */
-.sc-col-num     { width: 24px; min-width: 24px; color: #888; font-size: 0.7rem; }
-.sc-col-jersey  { width: 30px; min-width: 30px; color: #888; }
-.sc-col-player  { width: 150px; min-width: 150px; text-align: left !important; padding-left: 8px; }
-.sc-col-pos     { width: 36px; min-width: 36px; font-weight: bold; color: #444; }
-.sc-col-ab      { width: 48px; min-width: 48px; padding: 2px; }
+.sc-col-player  { width: 160px; min-width: 160px; text-align: left !important; padding: 4px 8px; }
+.sc-col-ab      { width: 56px; min-width: 56px; padding: 2px; }
 .sc-col-stat    { width: 32px; min-width: 32px; font-size: 0.75rem; }
 .sc-stat-border { border-left: 2px solid #9b8e6e !important; }
 
-/* ── Sticky left columns ── */
-.sc-col-num,
-.sc-sticky-2,
-.sc-sticky-3,
-.sc-sticky-4 {
+/* Player name + position subtext */
+.sc-player-name {
+  display: block;
+  font-size: 0.78rem;
+}
+.sc-player-pos {
+  display: block;
+  font-size: 0.65rem;
+  color: #888;
+  font-style: italic;
+  margin-top: 1px;
+}
+
+/* ── Sticky player column ── */
+.sc-sticky-1 {
   position: sticky;
+  left: 0;
   z-index: 2;
-  /* Explicit background required — 'inherit' lets scrolled content bleed through */
   background: #fffdf7;
 }
-.sc-col-num  { left: 0; }
-.sc-sticky-2 { left: 24px; }
-.sc-sticky-3 { left: 54px; }
-.sc-sticky-4 { left: 204px; }
 
-/* Header sticky cells */
-.scorecard-table thead th.sc-col-num,
-.scorecard-table thead .sc-sticky-2,
-.scorecard-table thead .sc-sticky-3,
-.scorecard-table thead .sc-sticky-4 {
+.scorecard-table thead .sc-sticky-1 {
   background: #f5f0e4;
   z-index: 3;
 }
 
-/* Substitute row sticky cells */
-.sc-row-sub .sc-col-num,
-.sc-row-sub .sc-sticky-2,
-.sc-row-sub .sc-sticky-3,
-.sc-row-sub .sc-sticky-4 {
-  background: #faf8f2;
-}
-
-/* Hover sticky cells */
-.scorecard-table tbody tr:hover .sc-col-num,
-.scorecard-table tbody tr:hover .sc-sticky-2,
-.scorecard-table tbody tr:hover .sc-sticky-3,
-.scorecard-table tbody tr:hover .sc-sticky-4 {
-  background: #f0ece0;
-}
+.sc-row-sub .sc-sticky-1    { background: #faf8f2; }
+.scorecard-table tbody tr:hover .sc-sticky-1 { background: #f0ece0; }
 
 /* ── Row styles ── */
 .scorecard-table tbody tr:hover td {

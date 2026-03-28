@@ -65,11 +65,15 @@ const POSITION_MAP: Array<[string, number]> = [
 
 function positionsInOrder(description: string): number[] {
   const lower = description.toLowerCase();
-  return POSITION_MAP
-    .map(([name, pos]) => ({ pos, idx: lower.indexOf(name) }))
-    .filter(({ idx }) => idx !== -1)
-    .sort((a, b) => a.idx - b.idx)
-    .map(({ pos }) => pos);
+  const hits: Array<{ pos: number; idx: number }> = [];
+  for (const [name, pos] of POSITION_MAP) {
+    let idx = lower.indexOf(name);
+    while (idx !== -1) {
+      hits.push({ pos, idx });
+      idx = lower.indexOf(name, idx + name.length);
+    }
+  }
+  return hits.sort((a, b) => a.idx - b.idx).map(({ pos }) => pos);
 }
 
 function getEventCode(event: string, description: string): string {
@@ -205,7 +209,8 @@ export function buildScorecardData(
     })
     .filter((b): b is BatterRow => b !== null);
 
-  const maxAtBats = Math.max(5, ...batters.map(b => b.atBats.length));
+  const maxFilled = Math.max(0, ...batters.map(b => b.atBats.length));
+  const maxAtBats = maxFilled === 0 ? 1 : maxFilled;
 
   // Build pitcher entries
   const pitchers: PitcherEntry[] = boxTeam.pitchers
