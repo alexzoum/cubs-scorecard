@@ -77,6 +77,8 @@
 
 .sc-bat-icon {
   flex-shrink: 0;
+  width: 14px;
+  height: 14px;
 }
 .sc-player-pos {
   display: block;
