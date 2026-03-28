@@ -184,6 +184,11 @@ export default function App() {
   const cubsData = feed ? buildScorecardData(feed, cubsSide) : null;
   const oppData = feed ? buildScorecardData(feed, oppSide) : null;
 
+  const homeData = cubsIsHome ? cubsData : oppData;
+  const homeSide = cubsIsHome ? cubsSide : oppSide;
+  const awayData = cubsIsHome ? oppData : cubsData;
+  const awaySide = cubsIsHome ? oppSide : cubsSide;
+
   const selectedGame = games.find(g => g.gamePk === selectedPk);
 
   return (
@@ -228,8 +233,8 @@ export default function App() {
           <div className="scorecard-page">
             <GameHeader feed={feed} game={selectedGame} />
             <Linescore feed={feed} />
-            {oppData && <Scorecard data={oppData} feed={feed} side={oppSide} />}
-            {cubsData && <Scorecard data={cubsData} feed={feed} side={cubsSide} />}
+            {homeData && <Scorecard data={homeData} feed={feed} side={homeSide} />}
+            {awayData && <Scorecard data={awayData} feed={feed} side={awaySide} />}
           </div>
         )}
       </main>
