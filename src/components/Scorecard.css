@@ -71,37 +71,43 @@
 .sc-stat-border { border-left: 2px solid #9b8e6e !important; }
 
 /* ── Sticky left columns ── */
-.sc-col-num {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  background: #f5f0e4;
-}
-.sc-sticky-2 {
-  position: sticky;
-  left: 24px;
-  z-index: 2;
-  background: inherit;
-}
-.sc-sticky-3 {
-  position: sticky;
-  left: 54px;
-  z-index: 2;
-  background: inherit;
-}
+.sc-col-num,
+.sc-sticky-2,
+.sc-sticky-3,
 .sc-sticky-4 {
   position: sticky;
-  left: 204px;
   z-index: 2;
-  background: inherit;
+  /* Explicit background required — 'inherit' lets scrolled content bleed through */
+  background: #fffdf7;
 }
+.sc-col-num  { left: 0; }
+.sc-sticky-2 { left: 24px; }
+.sc-sticky-3 { left: 54px; }
+.sc-sticky-4 { left: 204px; }
 
+/* Header sticky cells */
 .scorecard-table thead th.sc-col-num,
 .scorecard-table thead .sc-sticky-2,
 .scorecard-table thead .sc-sticky-3,
 .scorecard-table thead .sc-sticky-4 {
   background: #f5f0e4;
   z-index: 3;
+}
+
+/* Substitute row sticky cells */
+.sc-row-sub .sc-col-num,
+.sc-row-sub .sc-sticky-2,
+.sc-row-sub .sc-sticky-3,
+.sc-row-sub .sc-sticky-4 {
+  background: #faf8f2;
+}
+
+/* Hover sticky cells */
+.scorecard-table tbody tr:hover .sc-col-num,
+.scorecard-table tbody tr:hover .sc-sticky-2,
+.scorecard-table tbody tr:hover .sc-sticky-3,
+.scorecard-table tbody tr:hover .sc-sticky-4 {
+  background: #f0ece0;
 }
 
 /* ── Row styles ── */
@@ -112,12 +118,6 @@
 .sc-row-sub td {
   color: #777;
   font-style: italic;
-  background: #faf8f2;
-}
-
-.sc-row-sub .sc-sticky-2,
-.sc-row-sub .sc-sticky-3,
-.sc-row-sub .sc-sticky-4 {
   background: #faf8f2;
 }
 
