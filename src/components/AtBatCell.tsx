@@ -1,4 +1,3 @@
-import React from 'react';
 import { AtBatEntry } from '../utils/scorecard';
 
 interface Props {
@@ -40,8 +39,6 @@ export default function AtBatCell({ atBat }: Props) {
     strokeWidth: active ? 2 : 1,
   });
 
-  const fontSize = eventCode.length <= 2 ? 9 : 7;
-
   return (
     <svg viewBox="0 0 44 44" width="44" height="44" className={`ab-cell${isOut ? ' ab-cell--out' : ''}${isScorer ? ' ab-cell--scored' : ''}`}>
       {/* Inning number */}
@@ -62,17 +59,12 @@ export default function AtBatCell({ atBat }: Props) {
       <line x1={SECOND.x} y1={SECOND.y} x2={THIRD.x} y2={THIRD.y} {...strokeFor(seg3)} />
       <line x1={THIRD.x} y1={THIRD.y} x2={HOME.x} y2={HOME.y} {...strokeFor(seg4)} />
 
-      {/* Scoring run indicator dot */}
-      {isScorer && (
-        <circle cx="22" cy="22" r="3.5" fill={ACTIVE_COLOR} />
-      )}
-
-      {/* Event code */}
+      {/* Event code — font shrinks for longer codes like 4-6-3 */}
       <text
         x="22"
-        y="26"
+        y="27"
         textAnchor="middle"
-        fontSize={fontSize}
+        fontSize={eventCode.length <= 2 ? 9 : eventCode.length <= 4 ? 7.5 : 6}
         fontWeight="bold"
         fill={isOut ? '#999' : ACTIVE_COLOR}
         fontFamily="monospace"

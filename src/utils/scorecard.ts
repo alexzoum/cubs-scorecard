@@ -50,33 +50,74 @@ export interface ScorecardData {
   pitchers: PitcherEntry[];
 }
 
-const EVENT_CODES: Record<string, string> = {
-  'Single': '1B',
-  'Double': '2B',
-  'Triple': '3B',
-  'Home Run': 'HR',
-  'Strikeout': 'K',
-  'Walk': 'BB',
-  'Intent Walk': 'IBB',
-  'Hit By Pitch': 'HBP',
-  "Fielder's Choice": 'FC',
-  "Fielder's Choice Out": 'FC',
-  'Field Error': 'E',
-  'Sac Bunt': 'SH',
-  'Sac Fly': 'SF',
-  'Double Play': 'DP',
-  'Grounded Into DP': 'GDP',
-  'Triple Play': 'TP',
-  'Flyout': 'F',
-  'Groundout': 'G',
-  'Lineout': 'L',
-  'Pop Out': 'P',
-  'Forceout': 'FO',
-  'Bunt Groundout': 'BG',
-  'Bunt Pop Out': 'BP',
-  'Catcher Interference': 'CI',
-  'Fan interference': 'FI',
-};
+// Ordered so longer names match before shorter substrings (e.g. "first baseman" before "baseman")
+const POSITION_MAP: Array<[string, number]> = [
+  ['first baseman', 3],
+  ['second baseman', 4],
+  ['third baseman', 5],
+  ['shortstop', 6],
+  ['left fielder', 7],
+  ['center fielder', 8],
+  ['right fielder', 9],
+  ['pitcher', 1],
+  ['catcher', 2],
+];
+
+function positionsInOrder(description: string): number[] {
+  const lower = description.toLowerCase();
+  return POSITION_MAP
+    .map(([name, pos]) => ({ pos, idx: lower.indexOf(name) }))
+    .filter(({ idx }) => idx !== -1)
+    .sort((a, b) => a.idx - b.idx)
+    .map(({ pos }) => pos);
+}
+
+function getEventCode(event: string, description: string): string {
+  const pos = positionsInOrder(description);
+
+  switch (event) {
+    case 'Strikeout':
+      return description.toLowerCase().includes('called out on strikes') ? 'ꓘ' : 'K';
+    case 'Flyout':
+      return pos.length > 0 ? `F${pos[0]}` : 'F';
+    case 'Sac Fly':
+      return pos.length > 0 ? `SF${pos[0]}` : 'SF';
+    case 'Pop Out':
+    case 'Bunt Pop Out':
+      return pos.length > 0 ? `P${pos[0]}` : 'P';
+    case 'Lineout':
+      return pos.length > 0 ? `L${pos[0]}` : 'L';
+    case 'Groundout':
+    case 'Bunt Groundout':
+      if (pos.length >= 2) return `${pos[0]}-${pos[1]}`;
+      return pos.length === 1 ? `${pos[0]}` : 'G';
+    case 'Forceout':
+    case "Fielder's Choice Out":
+      if (pos.length >= 2) return `${pos[0]}-${pos[1]}`;
+      return 'FC';
+    case 'Grounded Into DP':
+    case 'Double Play':
+      if (pos.length >= 3) return `${pos[0]}-${pos[1]}-${pos[2]}`;
+      if (pos.length === 2) return `${pos[0]}-${pos[1]}`;
+      return 'GDP';
+    case 'Triple Play':
+      if (pos.length >= 3) return `${pos[0]}-${pos[1]}-${pos[2]}`;
+      return 'TP';
+    case 'Single':           return '1B';
+    case 'Double':           return '2B';
+    case 'Triple':           return '3B';
+    case 'Home Run':         return 'HR';
+    case 'Walk':             return 'BB';
+    case 'Intent Walk':      return 'IBB';
+    case 'Hit By Pitch':     return 'HBP';
+    case "Fielder's Choice": return 'FC';
+    case 'Field Error':      return 'E';
+    case 'Sac Bunt':         return 'SH';
+    case 'Catcher Interference': return 'CI';
+    default:
+      return event.substring(0, 3).toUpperCase();
+  }
+}
 
 function getBasesReached(play: PlayResult): number {
   const event = play.result.event;
@@ -125,7 +166,7 @@ export function buildScorecardData(
     if (!batterAtBats.has(batterId)) batterAtBats.set(batterId, []);
 
     const event = play.result.event;
-    const eventCode = EVENT_CODES[event] ?? event.substring(0, 3).toUpperCase();
+    const eventCode = getEventCode(event, play.result.description);
     const basesReached = getBasesReached(play);
     const scorerKey = `${halfInning}-${play.about.inning}`;
     const scored = basesReached === 4 || (scorers.get(scorerKey)?.has(batterId) ?? false);

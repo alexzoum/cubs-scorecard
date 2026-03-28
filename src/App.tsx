@@ -18,9 +18,10 @@ function formatGameTime(dateTime: string): string {
 
 function Linescore({ feed }: { feed: LiveFeed }) {
   const { linescore } = feed.liveData;
-  const { teams } = feed.gameData;
+  const { teams, status } = feed.gameData;
   const innings = linescore.innings;
   const total = Math.max(linescore.scheduledInnings, innings.length);
+  const isLive = status.abstractGameState === 'Live';
   const innNums = Array.from({ length: total }, (_, i) => i + 1);
 
   return (
@@ -30,7 +31,7 @@ function Linescore({ feed }: { feed: LiveFeed }) {
           <tr>
             <th className="ls-team-col" />
             {innNums.map(n => (
-              <th key={n} className={`ls-inn-col${linescore.currentInning === n ? ' ls-current' : ''}`}>
+              <th key={n} className={`ls-inn-col${isLive && linescore.currentInning === n ? ' ls-current' : ''}`}>
                 {n}
               </th>
             ))}
@@ -52,7 +53,7 @@ function Linescore({ feed }: { feed: LiveFeed }) {
                   const inn = innings[n - 1];
                   const val = inn?.[side]?.runs;
                   return (
-                    <td key={n} className={`ls-inn-col${linescore.currentInning === n ? ' ls-current' : ''}`}>
+                    <td key={n} className={`ls-inn-col${isLive && linescore.currentInning === n ? ' ls-current' : ''}`}>
                       {val ?? (inn ? '0' : '')}
                     </td>
                   );
