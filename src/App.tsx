@@ -196,7 +196,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-title">
-          <span className="app-logo">⚾</span>
+          <img src="/flag.svg" alt="Fly the W" className="app-logo" />
           <span>Cubs Scorecard</span>
         </div>
         <div className="date-picker">

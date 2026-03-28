@@ -34,7 +34,7 @@ body {
   letter-spacing: 0.04em;
 }
 
-.app-logo { font-size: 1.4rem; }
+.app-logo { width: 28px; height: 28px; }
 
 .date-picker input {
   padding: 5px 10px;
