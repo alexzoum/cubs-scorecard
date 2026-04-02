@@ -3,6 +3,7 @@
   border: 2px solid #0E3386;
   border-radius: 4px;
   overflow: hidden;
+  width: min-content;
 }
 
 .scorecard-team-header {
